@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: gitlab
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost'
+    image: gitlab/gitlab-ce:latest
+    ports:
+      - "57162:80"
+      # - "60683:443"
+      # - "65163:22"
+    restart: unless-stopped
+    volumes:
+      - config:/etc/gitlab
+      - data:/var/opt/gitlab
+      - logs:/var/log/gitlab
+
+volumes:
+  config:
+  data:
+  logs:
